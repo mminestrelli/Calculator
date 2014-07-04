@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E71AAE01966E7600099B929 /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E71AADF1966E7600099B929 /* CalculatorViewController.m */; };
+		4E8775961965ABD7003514A7 /* CalculatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E8775941965ABD7003514A7 /* CalculatorViewController.xib */; };
 		4ED98AB71964581200E5AA59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED98AB61964581200E5AA59 /* Foundation.framework */; };
 		4ED98AB91964581200E5AA59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED98AB81964581200E5AA59 /* CoreGraphics.framework */; };
 		4ED98ABB1964581200E5AA59 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED98ABA1964581200E5AA59 /* UIKit.framework */; };
@@ -33,6 +35,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E71AADE1966E7600099B929 /* CalculatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorViewController.h; sourceTree = "<group>"; };
+		4E71AADF1966E7600099B929 /* CalculatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
+		4E8775941965ABD7003514A7 /* CalculatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalculatorViewController.xib; sourceTree = "<group>"; };
 		4ED98AB31964581200E5AA59 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ED98AB61964581200E5AA59 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4ED98AB81964581200E5AA59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -117,6 +122,9 @@
 				4ED98ABD1964581200E5AA59 /* Supporting Files */,
 				4ED98AE519645A4D00E5AA59 /* Calculator.h */,
 				4ED98AE619645A4D00E5AA59 /* Calculator.m */,
+				4E71AADE1966E7600099B929 /* CalculatorViewController.h */,
+				4E71AADF1966E7600099B929 /* CalculatorViewController.m */,
+				4E8775941965ABD7003514A7 /* CalculatorViewController.xib */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -227,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4ED98AC11964581200E5AA59 /* InfoPlist.strings in Resources */,
+				4E8775961965ABD7003514A7 /* CalculatorViewController.xib in Resources */,
 				4ED98AC91964581200E5AA59 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -248,6 +257,7 @@
 			files = (
 				4ED98AE719645A4D00E5AA59 /* Calculator.m in Sources */,
 				4ED98AC71964581200E5AA59 /* AppDelegate.m in Sources */,
+				4E71AAE01966E7600099B929 /* CalculatorViewController.m in Sources */,
 				4ED98AC31964581200E5AA59 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -451,6 +461,7 @@
 				4ED98AE11964581200E5AA59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4ED98AE21964581200E5AA59 /* Build configuration list for PBXNativeTarget "CalculatorTests" */ = {
 			isa = XCConfigurationList;
@@ -459,6 +470,7 @@
 				4ED98AE41964581200E5AA59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
