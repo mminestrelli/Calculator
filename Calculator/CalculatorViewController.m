@@ -10,31 +10,60 @@
 #import "Calculator.h"
 
 @interface CalculatorViewController (){
-    float operand;
-    int intPart;
-    int decimal;
-    NSString * operator;
-    NSString * upperDisplay;
-    NSString * ansString;
-    NSString * operandString;
-    Boolean decimalMode;
-    Boolean erase;
-    Boolean printed;
-    Calculator * myCalc;
-    NSDictionary * history;
+    float _operand;
+    NSString * _operator;
+    NSString * _upperDisplay;
+    NSString * _ansString;
+    NSString * _operandString;
+    Boolean _decimalMode;
+    Boolean _erase;
+    Boolean _printed;
+    Calculator * _myCalc;
+    NSDictionary * _history;
     
 }
+
+@property (nonatomic,copy) NSString * operator;
+@property (nonatomic,copy) NSString * upperDisplay;
+@property (nonatomic,copy) NSString * ansString;
+@property (nonatomic,copy) NSString * operandString;
+@property (nonatomic,retain) Calculator * myCalc;
+@property (nonatomic,assign) Boolean  decimalMode;
+@property (nonatomic,assign) Boolean  erase;
+@property (nonatomic,assign) Boolean printed;
+@property (nonatomic,retain) NSDictionary * history;
+@property (nonatomic,assign) float operand;
 
 @end
 
 @implementation CalculatorViewController
+@synthesize operator=_operator;
+@synthesize ansString=_ansString;
+@synthesize upperDisplay=_upperDisplay;
+@synthesize operandString=_operandString;
+@synthesize myCalc=_myCalc;
+@synthesize decimalMode=_decimalMode;
+@synthesize erase=_erase;
+@synthesize printed=_printed;
+@synthesize history=_history;
+@synthesize operand=_operand;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        myCalc=[[Calculator alloc]init];
-        [self resetVariables];
+        self.myCalc=[[[Calculator alloc]init]autorelease];
+        self.ansString=@"";
+        self.operandString=@"";
+        self.ansString=@"";
+        self.upperDisplay=@"";
+        self.history= [NSDictionary dictionary];
+        self.decimalMode=NO;
+        self.erase=NO;
+        self.printed=NO;
+        
+
     }
     return self;
 }
@@ -65,57 +94,57 @@
 #pragma mark - Actions
 - (IBAction)onNumberButtonPressed:(UIButton *)sender{
     NSString *input = sender.titleLabel.text;
-    if(erase){
+    if(self.erase){
         [self.operationResultDisplayLabel setText:@""];
-        erase=NO;
+        self.erase=NO;
     }
-    if(operator!= nil){
+    if(self.operator!=nil){
         //The number is part of the operand
-        //NSLog(operandString);
-        operandString= [operandString stringByAppendingString:input];
-        //NSLog(operandString);
-        operand=[operandString floatValue];
+        //NSLog(self.operandString);
+        self.operandString= [self.operandString stringByAppendingString:input];
+        //NSLog(self.operandString);
+        self.operand=[self.operandString floatValue];
         //NSLog(operandString);
         
     }else{
         //The number is part of ans
         //NSLog(ansString);
-        ansString= [ansString stringByAppendingString:input];
-         //NSLog(ansString);
-        [myCalc setAns:[NSNumber numberWithFloat:[ansString floatValue]]];
-        //NSLog(ansString);
+        self.ansString= [self.ansString stringByAppendingString:input];
+         NSLog(self.ansString);
+        [self.myCalc setAns:[NSNumber numberWithFloat:[self.ansString floatValue]]];
+        NSLog(self.ansString);
     }
-    upperDisplay= [upperDisplay stringByAppendingString:input];
+    self.upperDisplay= [self.upperDisplay stringByAppendingString:input];
     //Refresh operation Label
-    [self.operationResultDisplayLabel setText:upperDisplay];
-    //NSLog(upperDisplay);
+    [self.operationResultDisplayLabel setText:self.upperDisplay];
+    //NSLog(self.upperDisplay);
      };
 
 - (IBAction)onOperatorButtonPressed:(UIButton *)sender{
 
     NSString *input = sender.titleLabel.text;
-    if(erase){
+    if(self.erase){
         [self.operationResultDisplayLabel setText:@""];
-        erase=NO;
+        self.erase=NO;
     }
-    if(operator!=nil){
-        if(![operandString isEqualToString:@""]){
-            upperDisplay=ansString;
+    if(self.operator!=nil){
+        if(![self.operandString isEqualToString:@""]){
+            self.upperDisplay=self.ansString;
         }
     }else{
-        ansString=[NSString stringWithFormat:@"%f",[myCalc.ans floatValue]];
-        upperDisplay=ansString;
+        self.ansString=[NSString stringWithFormat:@"%f",[self.myCalc.ans floatValue]];
+        self.upperDisplay=self.ansString;
     }
-    decimalMode=NO;
-    operator=sender.titleLabel.text;
-    upperDisplay= [upperDisplay stringByAppendingString:input];
-    [self.operationResultDisplayLabel setText:upperDisplay];
+    self.decimalMode=NO;
+    self.operator=sender.titleLabel.text;
+    self.upperDisplay= [self.upperDisplay stringByAppendingString:input];
+    [self.operationResultDisplayLabel setText:self.upperDisplay];
     
 };
 
 - (IBAction)onClearButtonPressed:(UIButton *)sender{
-    [myCalc reset];
-    operand=0.0;
+    [self.myCalc reset];
+    self.operand=0.0;
     [self resetVariables];
     [self.operationResultDisplayLabel setText:@""];
     [self.resultDisplayLabel setText:@"0"];
@@ -123,54 +152,55 @@
 };
 
 - (IBAction)onCommaButtonPressed:(UIButton *)sender{
-    if(!decimalMode){
-        decimalMode=YES;
-        upperDisplay= [upperDisplay stringByAppendingString:sender.titleLabel.text];
-        if(operator!=nil){
-            //operandString= [operandString stringByAppendingString:@"."];
+    if(!self.decimalMode){
+        self.decimalMode=YES;
+        self.upperDisplay= [self.upperDisplay stringByAppendingString:sender.titleLabel.text];
+        if(self.operator!=nil){
+            self.operandString= [self.operandString stringByAppendingString:@"."];
         }else{
-            //ansString= [ansString stringByAppendingString:@"."];
-             //NSLog(ansString);
+            self.ansString= [self.ansString stringByAppendingString:@"."];
+             NSLog(self.ansString);
         }
         
-        [self.operationResultDisplayLabel setText:upperDisplay];
+        [self.operationResultDisplayLabel setText:self.upperDisplay];
     }
 };
 
 - (IBAction)onEqualsButtonPressed:(UIButton *)sender {
     //if operator not null do operation, else assign operand the number builted, make operand null
     
-    if(operator!=nil){
-        if([operator isEqualToString:@"+"]) {
-            [myCalc add:operand];
-        } else if([operator isEqualToString:@"-"]) {
-            [myCalc substract:operand];
-        } else if([operator isEqualToString:@"X"]) {
-            [myCalc multiply:operand];
-        } else if([operator isEqualToString:@"/"]) {
-            if(operand==0.0 && ![operandString isEqualToString:@""]){
-                printed=YES;
+    if(self.operator!=nil){
+        if([self.operator isEqualToString:@"+"]) {
+            [self.myCalc add:self.operand];
+        } else if([self.operator isEqualToString:@"-"]) {
+            [self.myCalc substract:self.operand];
+        } else if([self.operator isEqualToString:@"X"]) {
+            [self.myCalc multiply:self.operand];
+        } else if([self.operator isEqualToString:@"/"]) {
+
+            if(self.operand==0.0 && ![self.operandString isEqualToString:@""]){
+                self.printed=YES;
                 [self.resultDisplayLabel setText:@"∞"];
             }else{
-                [myCalc divide:operand];
+                [self.myCalc divide:self.operand];
             }
         }
 
     }
-    [history setValue:[NSString stringWithFormat:@"%f",[myCalc.ans floatValue]] forKey:upperDisplay];
-    operand=0.0;
+    //[self.history setValue:[NSString stringWithFormat:@"%f",[self.myCalc.ans floatValue]] forKey:self.upperDisplay];
+    self.operand=0.0;
     [self resetVariables];
-    erase=YES;
-    decimalMode=NO;
-    if(!printed){
-        [self changeLabelValue:[myCalc.ans floatValue]];
+    self.erase=YES;
+    self.decimalMode=NO;    
+    if(!self.printed){
+        [self changeLabelValue:[self.myCalc.ans floatValue]];
     }
-    printed=NO;
+    self.printed=NO;
 }
 - (IBAction)onHistoryButtonPressed:(UIButton *)sender{
     NSLog(@"@");
-    for (NSString* key in history) {
-        NSLog(@"key: %@, value: %@ \n", key, [history objectForKey:key]);
+    for (NSString* key in self.history) {
+        NSLog(@"key: %@, value: %@ \n", key, [self.history objectForKey:key]);
     }
 };
 
@@ -181,10 +211,10 @@
     [self.resultDisplayLabel setText:valueString];
 }
 -(void) resetVariables{
-    upperDisplay=@"";
-    ansString=@"";
-    operandString=@"";
-    operator=nil;
+    self.upperDisplay=@"";
+    self.ansString=@"";
+    self.operandString=@"";
+    self.operator=nil;
     
 }
 - (void)dealloc {
