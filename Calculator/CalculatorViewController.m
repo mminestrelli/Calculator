@@ -71,18 +71,18 @@
     }
     if(operator!= nil){
         //The number is part of the operand
-        NSLog(operandString);
+        //NSLog(operandString);
         operandString= [operandString stringByAppendingString:input];
-        NSLog(operandString);
+        //NSLog(operandString);
         operand=[operandString floatValue];
         //NSLog(operandString);
         
     }else{
         //The number is part of ans
-        NSLog(ansString);
+        //NSLog(ansString);
         ansString= [ansString stringByAppendingString:input];
-         NSLog(ansString);
-        [myCalc setAns:[[NSNumber alloc]initWithFloat:[ansString floatValue]]];
+         //NSLog(ansString);
+        [myCalc setAns:[NSNumber numberWithFloat:[ansString floatValue]]];
         //NSLog(ansString);
     }
     upperDisplay= [upperDisplay stringByAppendingString:input];
@@ -94,6 +94,10 @@
 - (IBAction)onOperatorButtonPressed:(UIButton *)sender{
 
     NSString *input = sender.titleLabel.text;
+    if(erase){
+        [self.operationResultDisplayLabel setText:@""];
+        erase=NO;
+    }
     if(operator!=nil){
         if(![operandString isEqualToString:@""]){
             upperDisplay=ansString;
@@ -126,7 +130,7 @@
             //operandString= [operandString stringByAppendingString:@"."];
         }else{
             //ansString= [ansString stringByAppendingString:@"."];
-             NSLog(ansString);
+             //NSLog(ansString);
         }
         
         [self.operationResultDisplayLabel setText:upperDisplay];
