@@ -34,9 +34,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         myCalc=[[Calculator alloc]init];
-        upperDisplay=@"";
-        ansString=@"";
-        operandString=@"";
+        [self resetVariables];
     }
     return self;
 }
@@ -73,13 +71,17 @@
     }
     if(operator!= nil){
         //The number is part of the operand
+        NSLog(operandString);
         operandString= [operandString stringByAppendingString:input];
+        NSLog(operandString);
         operand=[operandString floatValue];
         //NSLog(operandString);
         
     }else{
         //The number is part of ans
+        NSLog(ansString);
         ansString= [ansString stringByAppendingString:input];
+         NSLog(ansString);
         [myCalc setAns:[[NSNumber alloc]initWithFloat:[ansString floatValue]]];
         //NSLog(ansString);
     }
@@ -110,10 +112,7 @@
 - (IBAction)onClearButtonPressed:(UIButton *)sender{
     [myCalc reset];
     operand=0.0;
-    upperDisplay=@"";
-    ansString=@"";
-    operandString=@"";
-    operator=nil;
+    [self resetVariables];
     [self.operationResultDisplayLabel setText:@""];
     [self.resultDisplayLabel setText:@"0"];
     
@@ -123,6 +122,13 @@
     if(!decimalMode){
         decimalMode=YES;
         upperDisplay= [upperDisplay stringByAppendingString:sender.titleLabel.text];
+        if(operator!=nil){
+            //operandString= [operandString stringByAppendingString:@"."];
+        }else{
+            //ansString= [ansString stringByAppendingString:@"."];
+             NSLog(ansString);
+        }
+        
         [self.operationResultDisplayLabel setText:upperDisplay];
     }
 };
@@ -148,11 +154,8 @@
 
     }
     [history setValue:[NSString stringWithFormat:@"%f",[myCalc.ans floatValue]] forKey:upperDisplay];
-    operandString=@"";
-    ansString=@"";
     operand=0.0;
-    operator=nil;
-    upperDisplay=@"";
+    [self resetVariables];
     erase=YES;
     decimalMode=NO;
     if(!printed){
@@ -172,6 +175,13 @@
 -(void) changeLabelValue:(float) value{
     NSString *valueString = [NSString stringWithFormat:@"%f",value];
     [self.resultDisplayLabel setText:valueString];
+}
+-(void) resetVariables{
+    upperDisplay=@"";
+    ansString=@"";
+    operandString=@"";
+    operator=nil;
+    
 }
 - (void)dealloc {
     [_resultDisplayLabel release];
