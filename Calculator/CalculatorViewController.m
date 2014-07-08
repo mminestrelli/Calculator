@@ -129,12 +129,14 @@
     }
     if(self.operator!=nil){
         if(![self.operandString isEqualToString:@""]){
-            self.upperDisplay=self.ansString;
+            //resolve operation and reDraw
+            [self onEqualsButtonPressed:sender];
+            self.ansString=[NSString stringWithFormat:@"%f",[self.myCalc.ans floatValue]];
         }
     }else{
         self.ansString=[NSString stringWithFormat:@"%f",[self.myCalc.ans floatValue]];
-        self.upperDisplay=self.ansString;
     }
+    self.upperDisplay=self.ansString;
     self.decimalMode=NO;
     self.operator=sender.titleLabel.text;
     self.upperDisplay= [self.upperDisplay stringByAppendingString:input];
@@ -202,6 +204,9 @@
     for (NSString* key in self.history) {
         NSLog(@"%@,= %@ \n", key, [self.history objectForKey:key]);
     }
+    /*UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"History" message:@"Enter Password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
+    alert.alertViewStyle = UIAlertViewStyleSecureTextInput;
+    [alert show];*/
 };
 
 
