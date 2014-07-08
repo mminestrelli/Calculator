@@ -19,7 +19,7 @@
     Boolean _erase;
     Boolean _printed;
     Calculator * _myCalc;
-    NSDictionary * _history;
+    NSMutableDictionary * _history;
     
 }
 
@@ -31,7 +31,7 @@
 @property (nonatomic,assign) Boolean  decimalMode;
 @property (nonatomic,assign) Boolean  erase;
 @property (nonatomic,assign) Boolean printed;
-@property (nonatomic,retain) NSDictionary * history;
+@property (nonatomic,retain) NSMutableDictionary * history;
 @property (nonatomic,assign) float operand;
 
 @end
@@ -58,7 +58,7 @@
         self.operandString=@"";
         self.ansString=@"";
         self.upperDisplay=@"";
-        self.history= [NSDictionary dictionary];
+        self.history= [[[NSMutableDictionary alloc]init]autorelease];
         self.decimalMode=NO;
         self.erase=NO;
         self.printed=NO;
@@ -187,11 +187,11 @@
         }
 
     }
-    //[self.history setValue:[NSString stringWithFormat:@"%f",[self.myCalc.ans floatValue]] forKey:self.upperDisplay];
+    [self.history setValue:self.myCalc.ans forKey:self.upperDisplay];
     self.operand=0.0;
     [self resetVariables];
     self.erase=YES;
-    self.decimalMode=NO;    
+    self.decimalMode=NO;
     if(!self.printed){
         [self changeLabelValue:[self.myCalc.ans floatValue]];
     }
@@ -200,7 +200,7 @@
 - (IBAction)onHistoryButtonPressed:(UIButton *)sender{
     NSLog(@"@");
     for (NSString* key in self.history) {
-        NSLog(@"key: %@, value: %@ \n", key, [self.history objectForKey:key]);
+        NSLog(@"%@,= %@ \n", key, [self.history objectForKey:key]);
     }
 };
 
