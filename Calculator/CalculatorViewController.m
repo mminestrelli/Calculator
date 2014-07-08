@@ -63,7 +63,7 @@
         self.erase=NO;
         self.printed=NO;
         
-
+        
     }
     return self;
 }
@@ -81,15 +81,15 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 #pragma mark - Actions
 - (IBAction)onNumberButtonPressed:(UIButton *)sender{
@@ -110,18 +110,18 @@
         //The number is part of ans
         //NSLog(ansString);
         self.ansString= [self.ansString stringByAppendingString:input];
-         NSLog(self.ansString);
+        //NSLog(self.ansString);
         [self.myCalc setAns:[NSNumber numberWithFloat:[self.ansString floatValue]]];
-        NSLog(self.ansString);
+        //NSLog(self.ansString);
     }
     self.upperDisplay= [self.upperDisplay stringByAppendingString:input];
     //Refresh operation Label
     [self.operationResultDisplayLabel setText:self.upperDisplay];
     //NSLog(self.upperDisplay);
-     };
+};
 
 - (IBAction)onOperatorButtonPressed:(UIButton *)sender{
-
+    
     NSString *input = sender.titleLabel.text;
     if(self.erase){
         [self.operationResultDisplayLabel setText:@""];
@@ -131,10 +131,10 @@
         if(![self.operandString isEqualToString:@""]){
             //resolve operation and reDraw
             [self onEqualsButtonPressed:sender];
-            self.ansString=[NSString stringWithFormat:@"%f",[self.myCalc.ans floatValue]];
+            self.ansString=[NSString stringWithString:[[NSNumber numberWithFloat:[self.myCalc.ans floatValue]] stringValue]];
         }
     }else{
-        self.ansString=[NSString stringWithFormat:@"%f",[self.myCalc.ans floatValue]];
+        self.ansString=[NSString stringWithString:[[NSNumber numberWithFloat:[self.myCalc.ans floatValue]] stringValue]];
     }
     self.upperDisplay=self.ansString;
     self.decimalMode=NO;
@@ -161,7 +161,7 @@
             self.operandString= [self.operandString stringByAppendingString:@"."];
         }else{
             self.ansString= [self.ansString stringByAppendingString:@"."];
-             NSLog(self.ansString);
+            //NSLog(self.ansString);
         }
         
         [self.operationResultDisplayLabel setText:self.upperDisplay];
@@ -179,7 +179,7 @@
         } else if([self.operator isEqualToString:@"X"]) {
             [self.myCalc multiply:self.operand];
         } else if([self.operator isEqualToString:@"/"]) {
-
+            
             if(self.operand==0.0 && ![self.operandString isEqualToString:@""]){
                 self.printed=YES;
                 [self.resultDisplayLabel setText:@"∞"];
@@ -187,7 +187,7 @@
                 [self.myCalc divide:self.operand];
             }
         }
-
+        
     }
     [self.history setValue:self.myCalc.ans forKey:self.upperDisplay];
     self.operand=0.0;
@@ -205,16 +205,15 @@
     for (NSString* key in self.history) {
         NSLog(@"%@ = %@ \n", key, [self.history objectForKey:key]);
     }
-    /*UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"History" message:@"Enter Password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
-    alert.alertViewStyle = UIAlertViewStyleSecureTextInput;
-    [alert show];*/
+    /*UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"History" message:@"Last operations" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
+     [alert show];*/
 };
 
 
 #pragma mark - Custom messages
 
 -(void) changeLabelValue:(float) value{
-    NSString *valueString = [NSString stringWithFormat:@"%f",value];
+    NSString * valueString= [NSString stringWithString:[[NSNumber numberWithFloat:value] stringValue]];
     [self.resultDisplayLabel setText:valueString];
 }
 -(void) resetVariables{
@@ -234,6 +233,7 @@
     [transitionAnimation setFillMode:kCAFillModeBoth];
     [myLayer addAnimation:transitionAnimation forKey:@"fadeanimation"];
 }
+
 
 #pragma mark - Memory
 
