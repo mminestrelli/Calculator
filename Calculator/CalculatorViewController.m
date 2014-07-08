@@ -195,14 +195,15 @@
     self.erase=YES;
     self.decimalMode=NO;
     if(!self.printed){
+        [self resultLabelAnimation:self.resultDisplayLabel.layer];
         [self changeLabelValue:[self.myCalc.ans floatValue]];
     }
     self.printed=NO;
 }
 - (IBAction)onHistoryButtonPressed:(UIButton *)sender{
-    NSLog(@"@");
+    NSLog(@"History");
     for (NSString* key in self.history) {
-        NSLog(@"%@,= %@ \n", key, [self.history objectForKey:key]);
+        NSLog(@"%@ = %@ \n", key, [self.history objectForKey:key]);
     }
     /*UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"History" message:@"Enter Password" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
     alert.alertViewStyle = UIAlertViewStyleSecureTextInput;
@@ -211,6 +212,7 @@
 
 
 #pragma mark - Custom messages
+
 -(void) changeLabelValue:(float) value{
     NSString *valueString = [NSString stringWithFormat:@"%f",value];
     [self.resultDisplayLabel setText:valueString];
@@ -222,6 +224,19 @@
     self.operator=nil;
     
 }
+
+#pragma mark - Animations
+-(void) resultLabelAnimation:(CALayer *) myLayer{
+    CATransition *transitionAnimation = [CATransition animation];
+    [transitionAnimation setType:kCATransitionFromBottom];
+    [transitionAnimation setDuration:0.3f];
+    [transitionAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [transitionAnimation setFillMode:kCAFillModeBoth];
+    [myLayer addAnimation:transitionAnimation forKey:@"fadeanimation"];
+}
+
+#pragma mark - Memory
+
 - (void)dealloc {
     [_resultDisplayLabel release];
     [_operationResultDisplayLabel release];
