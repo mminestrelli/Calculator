@@ -16,8 +16,6 @@
 #import "DivisionOperation.h"
 
 @interface CalculatorTests : XCTestCase{
-    id<Operation> _operation;
-    Calculator * _calc;
 }
 
 @property(retain,nonatomic) id<Operation> operation;
@@ -25,8 +23,7 @@
 @end
 
 @implementation CalculatorTests
-@synthesize operation=_operation;
-@synthesize calc=_calc;
+
 - (void)setUp
 {
     [super setUp];
@@ -69,17 +66,9 @@
 }
 -(void)testReset
 {
-    Calculator * calc=[[Calculator alloc] init];
-    XCTAssertEqual([calc.ans floatValue] , 0.0, "Ans deberia ser 0");
-    [calc release];
-    
+    XCTAssertEqual([self.calc.ans floatValue] , 0.0, "Ans deberia ser 0");
 }
--(void) dealloc{
-    [_operation release];
-    [_calc release];
-    
-    [super dealloc];
-}
+
 
 
 @end

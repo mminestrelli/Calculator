@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MultiplesOfTwo.h"
 //#import "MainViewController.h"
-@interface AppDelegate : UIResponder <MultiplesOfTwo>
+@interface AppDelegate : UIResponder 
 
 @property (strong, nonatomic) UIWindow *window;
 

@@ -221,8 +221,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "23"
             endingLineNumber = "23"
-            landmarkName = "@interface Calculator()"
-            landmarkType = "2">
+            landmarkName = "-executeOperation:withValue:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

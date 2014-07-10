@@ -15,17 +15,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-   
-    
-    //Calculator * cal = [[Calculator alloc] init];
-    //[cal setDelegate:self];
-    
-    //[cal startCalculatingMultiple2];
-    
-    //[cal substract:-5];
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window setRootViewController:[[CalculatorViewController alloc]init]];
     [self.window makeKeyAndVisible];
