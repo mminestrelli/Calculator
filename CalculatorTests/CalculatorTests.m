@@ -18,8 +18,8 @@
 @interface CalculatorTests : XCTestCase{
 }
 
-@property(retain,nonatomic) id<Operation> operation;
-@property(retain,nonatomic) Calculator* calc;
+@property(strong,nonatomic) id<Operation> operation;
+@property(strong,nonatomic) Calculator* calc;
 @end
 
 @implementation CalculatorTests
