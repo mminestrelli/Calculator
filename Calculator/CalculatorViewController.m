@@ -180,18 +180,15 @@
             self.currentOperation= [[AddOperation alloc]init];
         } else if([self.operator isEqualToString:@"-"]) {
             self.currentOperation= [[SubstractOperation alloc]init];
-            //[self.myCalc substract:self.operand];
-        } else if([self.operator isEqualToString:@"X"]) {
+        } else if([self.operator isEqualToString:@"x"]) {
             self.currentOperation= [[MultiplicationOperation alloc]init];
-            //[self.myCalc multiply:self.operand];
-        } else if([self.operator isEqualToString:@"/"]) {
-            
+        } else if([self.operator isEqualToString:@"/"]) {            
             if(self.operand==0.0 && ![self.operandString isEqualToString:@""]){
                 self.printed=YES;
                 [self.resultDisplayLabel setText:@"∞"];
             }else{
                 self.currentOperation= [[DivisionOperation alloc]init];
-                //[self.myCalc divide:self.operand];
+
             }
         }
         
