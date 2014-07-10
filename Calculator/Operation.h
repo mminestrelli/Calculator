@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @protocol Operation <NSObject>
+
 -(CGFloat) operate:(CGFloat) ans with: (CGFloat) value;
 @end

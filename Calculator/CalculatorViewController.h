@@ -14,8 +14,8 @@
 #import "DivisionOperation.h"
 
 @interface CalculatorViewController : UIViewController
-@property (retain, nonatomic) IBOutlet UILabel *resultDisplayLabel;
-@property (retain, nonatomic) IBOutlet UILabel *operationResultDisplayLabel;
+@property (strong, nonatomic) IBOutlet UILabel *resultDisplayLabel;
+@property (strong, nonatomic) IBOutlet UILabel *operationResultDisplayLabel;
 
 
 - (IBAction)onNumberButtonPressed:(UIButton *)sender;

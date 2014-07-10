@@ -29,18 +29,18 @@
 @property (nonatomic,copy) NSString * upperDisplay;
 @property (nonatomic,copy) NSString * ansString;
 @property (nonatomic,copy) NSString * operandString;
-@property (nonatomic,retain) Calculator * myCalc;
-@property (nonatomic,assign) Boolean  decimalMode;
-@property (nonatomic,assign) Boolean  erase;
-@property (nonatomic,assign) Boolean printed;
-@property (nonatomic,retain) NSMutableDictionary * history;
-@property (nonatomic,assign) float operand;
-@property (nonatomic,retain) id<Operation> currentOperation;
+@property (nonatomic,strong) Calculator * myCalc;
+@property (nonatomic) Boolean  decimalMode;
+@property (nonatomic) Boolean  erase;
+@property (nonatomic) Boolean printed;
+@property (nonatomic,strong) NSMutableDictionary * history;
+@property (nonatomic) float operand;
+@property (nonatomic,strong) id<Operation> currentOperation;
 
 @end
 
 @implementation CalculatorViewController
-@synthesize operator=_operator;
+/*@synthesize operator=_operator;
 @synthesize ansString=_ansString;
 @synthesize upperDisplay=_upperDisplay;
 @synthesize operandString=_operandString;
@@ -50,19 +50,19 @@
 @synthesize printed=_printed;
 @synthesize history=_history;
 @synthesize operand=_operand;
-@synthesize currentOperation=_currentOperation;
+@synthesize currentOperation=_currentOperation;*/
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.myCalc=[[[Calculator alloc]init]autorelease];
+        self.myCalc=[[Calculator alloc]init];
         self.ansString=@"";
         self.operandString=@"";
         self.ansString=@"";
         self.upperDisplay=@"";
-        self.history= [[[NSMutableDictionary alloc]init]autorelease];
+        self.history= [[NSMutableDictionary alloc]init];
         self.decimalMode=NO;
         self.erase=NO;
         self.printed=NO;
@@ -173,7 +173,7 @@
 };
 
 - (IBAction)onEqualsButtonPressed:(UIButton *)sender {
-    //if operator not null do operation, else assign operand the number builted, make operand null
+    //if operator not null do operation, else weak operand the number builted, make operand null
     
     if(self.operator!=nil){
         if([self.operator isEqualToString:@"+"]) {
@@ -241,11 +241,4 @@
 }
 
 
-#pragma mark - Memory
-
-- (void)dealloc {
-    [_resultDisplayLabel release];
-    [_operationResultDisplayLabel release];
-    [super dealloc];
-}
 @end
