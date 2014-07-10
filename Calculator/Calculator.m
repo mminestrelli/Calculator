@@ -25,12 +25,11 @@
     
     return self;
 }
+/*
 -(void)add:(float) value{
     
     NSNumber * tempNumber = [[[NSNumber alloc]initWithFloat:([self.ans floatValue]+value)]autorelease];
     self.ans = tempNumber;
-    
-    [tempNumber release];
 
     NSLog(@"%f",[self.ans floatValue]);
 }
@@ -48,6 +47,10 @@
 -(void)divide:(float) value{
     self.ans=[[[NSNumber alloc]initWithFloat:([self.ans floatValue]/value)]autorelease];
     NSLog(@"%f",[self.ans floatValue]);
+}
+*/
+-(void) executeOperation:(id<Operation>)operation withValue: (CGFloat) value{
+    self.ans=[NSNumber numberWithFloat:[operation operate:[self.ans floatValue] with:value]];
 }
 -(void)reset{
     self.ans = [[[NSNumber alloc]initWithFloat:0]autorelease];
@@ -74,11 +77,12 @@
 }
 
 -(void) dealloc{
-    [super dealloc];
+    
     
     if (self.ans){
         [self.ans release];
     }
+    [super dealloc];
 }
 
 @end

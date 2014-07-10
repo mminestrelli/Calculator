@@ -9,6 +9,7 @@
 #import "CalculatorViewController.h"
 #import "Calculator.h"
 
+
 @interface CalculatorViewController (){
     float _operand;
     NSString * _operator;
@@ -20,6 +21,7 @@
     Boolean _printed;
     Calculator * _myCalc;
     NSMutableDictionary * _history;
+    id<Operation> _currentOperation;
     
 }
 
@@ -33,6 +35,7 @@
 @property (nonatomic,assign) Boolean printed;
 @property (nonatomic,retain) NSMutableDictionary * history;
 @property (nonatomic,assign) float operand;
+@property (nonatomic,retain) id<Operation> currentOperation;
 
 @end
 
@@ -47,6 +50,7 @@
 @synthesize printed=_printed;
 @synthesize history=_history;
 @synthesize operand=_operand;
+@synthesize currentOperation=_currentOperation;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -173,22 +177,27 @@
     
     if(self.operator!=nil){
         if([self.operator isEqualToString:@"+"]) {
-            [self.myCalc add:self.operand];
+            self.currentOperation= [[AddOperation alloc]init];
         } else if([self.operator isEqualToString:@"-"]) {
-            [self.myCalc substract:self.operand];
+            self.currentOperation= [[SubstractOperation alloc]init];
+            //[self.myCalc substract:self.operand];
         } else if([self.operator isEqualToString:@"X"]) {
-            [self.myCalc multiply:self.operand];
+            self.currentOperation= [[MultiplicationOperation alloc]init];
+            //[self.myCalc multiply:self.operand];
         } else if([self.operator isEqualToString:@"/"]) {
             
             if(self.operand==0.0 && ![self.operandString isEqualToString:@""]){
                 self.printed=YES;
                 [self.resultDisplayLabel setText:@"∞"];
             }else{
-                [self.myCalc divide:self.operand];
+                self.currentOperation= [[DivisionOperation alloc]init];
+                //[self.myCalc divide:self.operand];
             }
         }
         
     }
+    [self.myCalc executeOperation:self.currentOperation withValue:self.operand];
+    
     [self.history setValue:self.myCalc.ans forKey:self.upperDisplay];
     self.operand=0.0;
     [self resetVariables];

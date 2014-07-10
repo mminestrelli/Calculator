@@ -17,8 +17,8 @@
 {
    
     
-    Calculator * cal = [[Calculator alloc] init];
-    [cal setDelegate:self];
+    //Calculator * cal = [[Calculator alloc] init];
+    //[cal setDelegate:self];
     
     //[cal startCalculatingMultiple2];
     

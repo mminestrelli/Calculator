@@ -7,6 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Operation.h"
+#import "AddOperation.h"
+#import "SubstractOperation.h"
+#import "MultiplicationOperation.h"
+#import "DivisionOperation.h"
 
 @interface CalculatorViewController : UIViewController
 @property (retain, nonatomic) IBOutlet UILabel *resultDisplayLabel;

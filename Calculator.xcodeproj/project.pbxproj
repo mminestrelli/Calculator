@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		4E71AAE01966E7600099B929 /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E71AADF1966E7600099B929 /* CalculatorViewController.m */; };
 		4E8775961965ABD7003514A7 /* CalculatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E8775941965ABD7003514A7 /* CalculatorViewController.xib */; };
+		4EB2D198196EDA8600873062 /* AddOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB2D197196EDA8600873062 /* AddOperation.m */; };
+		4EB2D19C196EDB4000873062 /* SubstractOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB2D19B196EDB4000873062 /* SubstractOperation.m */; };
+		4EB2D19F196EDB4C00873062 /* MultiplicationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB2D19E196EDB4C00873062 /* MultiplicationOperation.m */; };
+		4EB2D1A2196EDB5600873062 /* DivisionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB2D1A1196EDB5600873062 /* DivisionOperation.m */; };
 		4ED98AB71964581200E5AA59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED98AB61964581200E5AA59 /* Foundation.framework */; };
 		4ED98AB91964581200E5AA59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED98AB81964581200E5AA59 /* CoreGraphics.framework */; };
 		4ED98ABB1964581200E5AA59 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ED98ABA1964581200E5AA59 /* UIKit.framework */; };
@@ -38,6 +42,15 @@
 		4E71AADE1966E7600099B929 /* CalculatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorViewController.h; sourceTree = "<group>"; };
 		4E71AADF1966E7600099B929 /* CalculatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
 		4E8775941965ABD7003514A7 /* CalculatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalculatorViewController.xib; sourceTree = "<group>"; };
+		4EB2D196196EDA8600873062 /* AddOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddOperation.h; sourceTree = "<group>"; };
+		4EB2D197196EDA8600873062 /* AddOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddOperation.m; sourceTree = "<group>"; };
+		4EB2D199196EDAB900873062 /* Operation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Operation.h; sourceTree = "<group>"; };
+		4EB2D19A196EDB4000873062 /* SubstractOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubstractOperation.h; sourceTree = "<group>"; };
+		4EB2D19B196EDB4000873062 /* SubstractOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubstractOperation.m; sourceTree = "<group>"; };
+		4EB2D19D196EDB4C00873062 /* MultiplicationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplicationOperation.h; sourceTree = "<group>"; };
+		4EB2D19E196EDB4C00873062 /* MultiplicationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiplicationOperation.m; sourceTree = "<group>"; };
+		4EB2D1A0196EDB5600873062 /* DivisionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivisionOperation.h; sourceTree = "<group>"; };
+		4EB2D1A1196EDB5600873062 /* DivisionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivisionOperation.m; sourceTree = "<group>"; };
 		4ED98AB31964581200E5AA59 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ED98AB61964581200E5AA59 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4ED98AB81964581200E5AA59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -116,15 +129,24 @@
 		4ED98ABC1964581200E5AA59 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				4ED98AC51964581200E5AA59 /* AppDelegate.h */,
-				4ED98AC61964581200E5AA59 /* AppDelegate.m */,
 				4ED98AC81964581200E5AA59 /* Images.xcassets */,
 				4ED98ABD1964581200E5AA59 /* Supporting Files */,
+				4ED98AC51964581200E5AA59 /* AppDelegate.h */,
+				4ED98AC61964581200E5AA59 /* AppDelegate.m */,
 				4ED98AE519645A4D00E5AA59 /* Calculator.h */,
 				4ED98AE619645A4D00E5AA59 /* Calculator.m */,
 				4E71AADE1966E7600099B929 /* CalculatorViewController.h */,
 				4E71AADF1966E7600099B929 /* CalculatorViewController.m */,
 				4E8775941965ABD7003514A7 /* CalculatorViewController.xib */,
+				4EB2D196196EDA8600873062 /* AddOperation.h */,
+				4EB2D199196EDAB900873062 /* Operation.h */,
+				4EB2D19A196EDB4000873062 /* SubstractOperation.h */,
+				4EB2D19B196EDB4000873062 /* SubstractOperation.m */,
+				4EB2D19D196EDB4C00873062 /* MultiplicationOperation.h */,
+				4EB2D19E196EDB4C00873062 /* MultiplicationOperation.m */,
+				4EB2D1A0196EDB5600873062 /* DivisionOperation.h */,
+				4EB2D1A1196EDB5600873062 /* DivisionOperation.m */,
+				4EB2D197196EDA8600873062 /* AddOperation.m */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -256,9 +278,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4ED98AE719645A4D00E5AA59 /* Calculator.m in Sources */,
+				4EB2D19F196EDB4C00873062 /* MultiplicationOperation.m in Sources */,
 				4ED98AC71964581200E5AA59 /* AppDelegate.m in Sources */,
+				4EB2D198196EDA8600873062 /* AddOperation.m in Sources */,
+				4EB2D1A2196EDB5600873062 /* DivisionOperation.m in Sources */,
 				4E71AAE01966E7600099B929 /* CalculatorViewController.m in Sources */,
 				4ED98AC31964581200E5AA59 /* main.m in Sources */,
+				4EB2D19C196EDB4000873062 /* SubstractOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
