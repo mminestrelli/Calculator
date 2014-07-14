@@ -81,24 +81,7 @@
 
 -(NSString*) lastOperationPerformed{
     NSString * operationDetail=@"";
-    /*if(self.firstOperand!=nil){
-        operationDetail= [operationDetail stringByAppendingString: [NSString stringWithString:[[NSNumber numberWithFloat:[self.firstOperand floatValue]] stringValue]]];}
-    else{
-        if(self.erase){
-            
-        operationDetail= [operationDetail stringByAppendingString: [NSString stringWithString:[[NSNumber numberWithFloat:[self.ans floatValue]] stringValue]]];
-        }
-    }
-    
-    if(self.operation!=nil){
-        operationDetail= [operationDetail stringByAppendingString:[self.operation operationString]];
-    }
-    
-    if(self.secondOperand!=nil){
-    operationDetail= [operationDetail stringByAppendingString: [NSString stringWithString:[[NSNumber numberWithFloat:[self.secondOperand floatValue]] stringValue]]];
-    }
-    self.lastOperationString=operationDetail;
-    return operationDetail;*/
+
     if(self.firstOperand!=nil){
         operationDetail= [operationDetail stringByAppendingString: [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[self.firstOperand floatValue]]]];}
     else{
@@ -165,8 +148,8 @@
 }
 -(void) setVariablesInNil{
     self.firstOperand=nil;
-    //self.secondOperand=nil;
-    //self.operation=nil;
+    self.secondOperand=nil;
+    self.operation=nil;
     self.operandString=@"";
     self.lastOperationString=@"";
     self.commaYetPressed=NO;

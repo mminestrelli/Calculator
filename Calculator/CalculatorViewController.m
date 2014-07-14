@@ -119,6 +119,7 @@
 - (IBAction)onEqualsButtonPressed:(UIButton *)sender {
     
     [self.myCalc executeOperation];
+    [self updateLabel];
     if([self.myCalc redrawIsNeeded]){
         [self updateLabel];
     }else{
@@ -137,6 +138,7 @@
     [self.resultDisplayLabel setText: [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[self.myCalc.ans floatValue]]]];
     [self resultLabelAnimation: self.resultDisplayLabel.layer ];
 }
+
 -(void) changeLabelValue:(float) value{
     NSString * valueString= [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:value] ];
     [self.resultDisplayLabel setText:valueString];
