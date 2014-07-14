@@ -13,4 +13,9 @@
 -(CGFloat) operate:(CGFloat) ans with: (CGFloat) value{
     return ans+value;
 }
+
+-(NSString *) operationString{
+    return @"+";
+}
+
 @end

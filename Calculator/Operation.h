@@ -11,4 +11,5 @@
 @protocol Operation <NSObject>
 
 -(CGFloat) operate:(CGFloat) ans with: (CGFloat) value;
+-(NSString *) operationString;
 @end

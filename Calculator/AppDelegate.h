@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MultiplesOfTwo.h"
+
 //#import "MainViewController.h"
 @interface AppDelegate : UIResponder 
 

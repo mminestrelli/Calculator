@@ -7,19 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MultiplesOfTwo.h"
 #import "Operation.h"
 
 
 @interface Calculator : NSObject
+@property (nonatomic,strong) NSNumber * ans;
 
-@property (nonatomic,retain) NSNumber * ans;
-@property (nonatomic,assign) id<MultiplesOfTwo> delegate;
-
-
+-(void)operationPressed:(id<Operation>)operation;
+-(NSString*) lastOperationPerformed;
+-(NSString*) lastOperationString;
+-(void) numberPressed:(NSString *) number;
+-(void) commaPressed;
 -(void)reset;
+-(void) printHistory;
+-(CGFloat) getAnsAsFloat;
+-(BOOL) redrawIsNeeded;
 
--(void) executeOperation:(id<Operation>) operation withValue: (CGFloat) value;
+-(void) executeOperation;
 
--(void) startCalculatingMultiple2;
 @end

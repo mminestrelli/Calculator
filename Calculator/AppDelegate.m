@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Calculator.h"
-#import "MultiplesOfTwo.h"
+
 #import "CalculatorViewController.h"
 
 @implementation AppDelegate

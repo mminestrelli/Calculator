@@ -28,7 +28,6 @@
 {
     [super setUp];
     self.calc=[[Calculator alloc] init];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
 - (void)tearDown
@@ -40,28 +39,98 @@
 -(void)testAddition
 {
     self.operation= [[AddOperation alloc]init];
-    [self.calc executeOperation:self.operation withValue:10.0];
+    [self.calc operationPressed:self.operation];
+    [self.calc numberPressed:@"1"];
+    [self.calc numberPressed:@"0"];
+    [self.calc executeOperation];
     XCTAssertEqual([self.calc.ans floatValue] , 10.0, "La suma de 0 mas 10 deberia ser 10");
+}
+
+-(void)testMultipleAddition
+{
+    self.operation= [[AddOperation alloc]init];
+    [self.calc operationPressed:self.operation];
+    [self.calc numberPressed:@"1"];
+    [self.calc numberPressed:@"0"];
+    self.operation= [[AddOperation alloc]init];
+    [self.calc operationPressed:self.operation];
+    [self.calc numberPressed:@"1"];
+    [self.calc numberPressed:@"0"];
+    [self.calc executeOperation];
+    XCTAssertEqual([self.calc.ans floatValue] , 20.0, "La suma de 0 mas 10 deberia ser 10");
+}
+
+-(void)testCommaOperation
+{
+    CGFloat n=10.7;
+    self.operation= [[AddOperation alloc]init];
+    [self.calc operationPressed:self.operation];
+    [self.calc numberPressed:@"1"];
+    [self.calc numberPressed:@"0"];
+    [self.calc commaPressed];
+    [self.calc numberPressed:@"7"];
+    [self.calc printOperandString];
+    [self.calc printHistory];
+    [self.calc executeOperation];
+    XCTAssertEqual([self.calc.ans floatValue] , n, "La suma de 0 mas 10 deberia ser 10");
+}
+
+-(void)testMultipleCommaOperation
+{
+    
+    CGFloat n=10.7;
+    self.operation= [[AddOperation alloc]init];
+    [self.calc operationPressed:self.operation];
+    [self.calc numberPressed:@"1"];
+    [self.calc numberPressed:@"0"];
+    [self.calc commaPressed];
+    [self.calc commaPressed];
+    [self.calc commaPressed];
+    [self.calc numberPressed:@"7"];
+    
+    [self.calc executeOperation];
+    XCTAssertEqual([self.calc.ans floatValue] , n, "La suma de 0 mas 10 deberia ser 10");
 }
 -(void)testSubstraction
 {
     self.operation= [[SubstractOperation alloc]init];
-    [self.calc executeOperation:self.operation withValue:10.0];
+    [self.calc operationPressed:self.operation];
+    [self.calc numberPressed:@"1"];
+    [self.calc numberPressed:@"0"];
+    [self.calc executeOperation];
     XCTAssertEqual([self.calc.ans floatValue] , -10.0, "La resta de 0 mas 10 deberia ser -10");
 }
 
 -(void)testMultiplication
 {
-    [self testAddition];
     self.operation= [[MultiplicationOperation alloc]init];
-    [self.calc executeOperation:self.operation withValue:10.0];
+    [self.calc numberPressed:@"1"];
+    [self.calc numberPressed:@"0"];
+    [self.calc operationPressed:self.operation];
+    [self.calc numberPressed:@"1"];
+    [self.calc numberPressed:@"0"];
+    [self.calc executeOperation];
     XCTAssertEqual([self.calc.ans floatValue] , 100.0, "La multiplicacion de 10 por 10 deberia ser 100");
+}
+
+-(void)testNestedMultiplication
+{
+    [self testMultiplication];
+    self.operation= [[MultiplicationOperation alloc]init];
+    [self.calc operationPressed:self.operation];
+    [self.calc numberPressed:@"1"];
+    [self.calc numberPressed:@"0"];
+    [self.calc executeOperation];
+    XCTAssertEqual([self.calc.ans floatValue] , 1000.0, "La multiplicacion de 10 por 10 deberia ser 100");
 }
 -(void)testDivision
 {
-    [self testAddition];
+    [self.calc numberPressed:@"1"];
+    [self.calc numberPressed:@"0"];
     self.operation= [[DivisionOperation alloc]init];
-    [self.calc executeOperation:self.operation withValue:2.0];
+    [self.calc operationPressed:self.operation];
+    [self.calc numberPressed:@"2"];
+    [self.calc executeOperation];
     XCTAssertEqual([self.calc.ans floatValue] , 5.0, "La division de 10 con 2 deberia ser 5");
 }
 -(void)testReset
