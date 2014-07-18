@@ -42,6 +42,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.myCalc=[[Calculator alloc]init];
+        [self.myCalc setDelegate:self];
         self.numberFormatter = [[NSNumberFormatter alloc] init];
         [self.numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     }
@@ -77,7 +78,7 @@
     NSString *input = sender.titleLabel.text;
     
     [self.myCalc numberPressed:input];
-    [self updateLabel];
+    //[self updateLabel];
 };
 
 - (IBAction)onOperatorButtonPressed:(UIButton *)sender{
@@ -100,7 +101,7 @@
     }
     
     [self.myCalc operationPressed:self.currentOperation];
-    [self updateLabel];
+    //[self updateLabel];
     
 };
 
@@ -113,15 +114,15 @@
 - (IBAction)onCommaButtonPressed:(UIButton *)sender{
     
     [self.myCalc commaPressed];
-    [self updateLabel];
+    //[self updateLabel];
 };
 
 - (IBAction)onEqualsButtonPressed:(UIButton *)sender {
     
     [self.myCalc executeOperation];
-    [self updateLabel];
+    //[self updateLabel];
     if([self.myCalc redrawIsNeeded]){
-        [self updateLabel];
+        //[self updateLabel];
     }else{
     [self.resultDisplayLabel setText: [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[self.myCalc.ans floatValue]]]];
     }
@@ -132,6 +133,14 @@
 
 
 #pragma mark - Custom messages
+
+-(void) onDisplayChange:(NSString*) upperDisplay withResult:(NSNumber*)result{
+    [self.operationResultDisplayLabel setText:upperDisplay ];
+    
+    [self.resultDisplayLabel setText: [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[result  floatValue]]]];
+    [self resultLabelAnimation: self.resultDisplayLabel.layer ];
+}
+
 -(void) updateLabel{
     [self.operationResultDisplayLabel setText:[self.myCalc lastOperationPerformed] ];
     

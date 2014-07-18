@@ -12,7 +12,8 @@
 #import "SubstractOperation.h"
 #import "MultiplicationOperation.h"
 #import "DivisionOperation.h"
+#import "DrawNotificationDelegate.h"
 
-@interface CalculatorViewController : UIViewController
+@interface CalculatorViewController : UIViewController<DrawNotificationDelegate>
 
 @end

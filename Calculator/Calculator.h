@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "Operation.h"
+#import "DrawNotificationDelegate.h"
 
 
 @interface Calculator : NSObject
 @property (nonatomic,strong) NSNumber * ans;
+@property (nonatomic,assign) id<DrawNotificationDelegate> delegate;
 
 -(void)operationPressed:(id<Operation>)operation;
 -(NSString*) lastOperationPerformed;

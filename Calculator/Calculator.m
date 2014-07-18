@@ -7,6 +7,7 @@
 //
 
 #import "Calculator.h"
+
 @interface Calculator(){
     NSNumber * _firstOperand;
     NSNumber * _secondOperand;
@@ -35,6 +36,7 @@
     @property (nonatomic,strong) id<Operation> lastOperation;
 
 
+
 @end
 
 @implementation Calculator
@@ -56,6 +58,7 @@
         self.commaYetPressed=YES;
         self.operandString= [self.operandString stringByAppendingString:@"."];
     }
+    [self.delegate onDisplayChange:self.lastOperationString withResult:self.ans];
 }
 
 -(void)numberPressed:(NSString *)number{
@@ -67,6 +70,7 @@
     }else{
         self.firstOperand=[NSNumber numberWithFloat:[self.operandString floatValue]];
     }
+    [self.delegate onDisplayChange:self.lastOperationString withResult:self.ans];
 }
 
 -(void)operationPressed:(id<Operation>)oper{
@@ -78,6 +82,7 @@
     self.operation=oper;
     self.commaYetPressed=NO;
     self.operandString=@"";
+    [self.delegate onDisplayChange:self.lastOperationString withResult:self.ans];
 };
 
 -(NSString*) lastOperationPerformed{
@@ -131,6 +136,7 @@
     }
     self.lastSecondOperand=self.secondOperand;
     self.lastOperation=self.operation;
+    [self.delegate onDisplayChange:self.lastOperationString withResult:self.ans];
     [self setVariablesInNil];
 }
 
@@ -144,6 +150,7 @@
 -(void)reset{
     self.ans = [[NSNumber alloc]initWithFloat:0];
     [self setVariablesInNil];
+    [self.delegate onDisplayChange:self.lastOperationString withResult:self.ans];
 }
 
 -(BOOL) redrawIsNeeded{

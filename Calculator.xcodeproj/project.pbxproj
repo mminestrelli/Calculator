@@ -52,6 +52,7 @@
 		4EB2D19E196EDB4C00873062 /* MultiplicationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiplicationOperation.m; sourceTree = "<group>"; };
 		4EB2D1A0196EDB5600873062 /* DivisionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivisionOperation.h; sourceTree = "<group>"; };
 		4EB2D1A1196EDB5600873062 /* DivisionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivisionOperation.m; sourceTree = "<group>"; };
+		4EB989841979623000E467D8 /* DrawNotificationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawNotificationDelegate.h; sourceTree = "<group>"; };
 		4ED15CB5196F06100098C95C /* Calculator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Calculator-icon.png"; sourceTree = "<group>"; };
 		4ED98AB31964581200E5AA59 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ED98AB61964581200E5AA59 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -100,6 +101,7 @@
 		4ED98AAA196457EB00E5AA59 = {
 			isa = PBXGroup;
 			children = (
+				4EB989841979623000E467D8 /* DrawNotificationDelegate.h */,
 				4ED98ABC1964581200E5AA59 /* Calculator */,
 				4ED98AD51964581200E5AA59 /* CalculatorTests */,
 				4ED98AB51964581200E5AA59 /* Frameworks */,
