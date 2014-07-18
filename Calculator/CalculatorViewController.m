@@ -17,13 +17,11 @@
     
 }
 
-
 @property (nonatomic,strong) Calculator * myCalc;
 @property (nonatomic,strong) id<Operation> currentOperation;
 @property (strong, nonatomic) IBOutlet UILabel *resultDisplayLabel;
 @property (strong, nonatomic) IBOutlet UILabel *operationResultDisplayLabel;
 @property (nonatomic,strong) NSNumberFormatter * numberFormatter;
-
 
 - (IBAction)onNumberButtonPressed:(UIButton *)sender;
 - (IBAction)onOperatorButtonPressed:(UIButton *)sender;
@@ -54,7 +52,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     // Do any additional setup after loading the view.
 }
 
@@ -77,12 +74,9 @@
 
 #pragma mark - Actions
 - (IBAction)onNumberButtonPressed:(UIButton *)sender{
-    
-    //NSString *input = [self.actionsWithIdentifiers ];
+
     NSString * input= sender.titleLabel.text;
     [self.myCalc numberPressed:input];
-    
-    
 };
 
 - (IBAction)onOperatorButtonPressed:(UIButton *)sender{
@@ -126,6 +120,7 @@
 
 -(void) onDisplayChange:(NSString*) upperDisplay withResult:(NSNumber*)result{
     [self.operationResultDisplayLabel setText:upperDisplay ];
+    
     [self.resultDisplayLabel setText: [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[result  floatValue]]]];
     [self resultLabelAnimation: self.resultDisplayLabel.layer ];
 }

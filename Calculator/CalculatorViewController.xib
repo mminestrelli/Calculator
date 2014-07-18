@@ -6,20 +6,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CalculatorViewController">
             <connections>
-                <outlet property="AdditionButton" destination="LKV-ZS-LIb" id="kV6-9g-hs8"/>
-                <outlet property="DivisionButton" destination="uqo-Fc-j6s" id="M81-mX-Ucj"/>
-                <outlet property="EightButton" destination="iZC-ex-GkD" id="3fF-cP-hTj"/>
-                <outlet property="FiveButton" destination="6Kl-pm-6sm" id="f0Y-we-ajX"/>
-                <outlet property="FourButton" destination="f50-hW-lNZ" id="X4J-cq-GC6"/>
-                <outlet property="MultiplicationButton" destination="uXg-wl-DFJ" id="Hbm-Mi-Nvp"/>
-                <outlet property="NineButton" destination="Gxq-lY-oPf" id="coy-tD-Kbs"/>
-                <outlet property="OneButton" destination="pbg-s2-wcr" id="lV1-3i-RwO"/>
-                <outlet property="SevenButton" destination="5LI-jj-Zmn" id="K8K-es-dUz"/>
-                <outlet property="SixButton" destination="8un-4S-dZD" id="rG5-s4-vyB"/>
-                <outlet property="SustractionButton" destination="3aE-GB-Oce" id="5fb-hJ-Hpt"/>
-                <outlet property="ThreeButton" destination="lyG-60-oMc" id="Rvx-jT-pTK"/>
-                <outlet property="TwoButton" destination="pbg-s2-wcr" id="CSz-VA-bs2"/>
-                <outlet property="ZeroButton" destination="0oR-UO-4vD" id="Cwy-jh-MOb"/>
                 <outlet property="operationResultDisplayLabel" destination="VjA-ZD-X2V" id="DqD-Dh-Suv"/>
                 <outlet property="resultDisplayLabel" destination="uvW-GU-f38" id="y8s-T7-6IX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="RL4-gG-Mc6"/>
