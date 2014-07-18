@@ -14,6 +14,21 @@
     Calculator * _myCalc;
     id<Operation> _currentOperation;
     NSNumberFormatter * _numberFormatter;
+    NSDictionary* _actionsWithIdentifiers;
+    UIButton * __OneButton;
+    UIButton * __TwoButton;
+    UIButton * __ThreeButton;
+    UIButton * __FourButton;
+    UIButton * __FiveButton;
+    UIButton * __SixButton;
+    UIButton * __SevenButton;
+    UIButton * __EightButton;
+    UIButton * __NineButton;
+    UIButton * __ZeroButton;
+    UIButton * __AdditionButton;
+    UIButton * __SustractionButton;
+    UIButton * __MultiplicationButton;
+    UIButton * __DivisionButton;
     
 }
 
@@ -23,6 +38,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *resultDisplayLabel;
 @property (strong, nonatomic) IBOutlet UILabel *operationResultDisplayLabel;
 @property (nonatomic,strong) NSNumberFormatter * numberFormatter;
+@property (nonatomic,strong) NSDictionary * actionsWithIdentifiers;
 
 
 - (IBAction)onNumberButtonPressed:(UIButton *)sender;
@@ -32,7 +48,21 @@
 - (IBAction)onEqualsButtonPressed:(UIButton *)sender;
 - (IBAction)onHistoryButtonPressed:(UIButton *)sender;
 
--(void) updateLabel;
+@property (weak, nonatomic) IBOutlet UIButton *OneButton;
+@property (weak, nonatomic) IBOutlet UIButton *TwoButton;
+@property (weak, nonatomic) IBOutlet UIButton *ThreeButton;
+@property (weak, nonatomic) IBOutlet UIButton *FourButton;
+@property (weak, nonatomic) IBOutlet UIButton *FiveButton;
+@property (weak, nonatomic) IBOutlet UIButton *SixButton;
+@property (weak, nonatomic) IBOutlet UIButton *SevenButton;
+@property (weak, nonatomic) IBOutlet UIButton *EightButton;
+@property (weak, nonatomic) IBOutlet UIButton *NineButton;
+@property (weak, nonatomic) IBOutlet UIButton *DivisionButton;
+@property (weak, nonatomic) IBOutlet UIButton *MultiplicationButton;
+@property (weak, nonatomic) IBOutlet UIButton *SustractionButton;
+@property (weak, nonatomic) IBOutlet UIButton *AdditionButton;
+@property (weak, nonatomic) IBOutlet UIButton *ZeroButton;
+
 @end
 
 @implementation CalculatorViewController
@@ -45,6 +75,8 @@
         [self.myCalc setDelegate:self];
         self.numberFormatter = [[NSNumberFormatter alloc] init];
         [self.numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        
+        
     }
     return self;
 }
@@ -52,6 +84,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.actionsWithIdentifiers= [NSDictionary dictionaryWithObjects:@[self.OneButton,self.TwoButton,self.ThreeButton,self.FourButton,self.FiveButton,self.SixButton,self.SevenButton,self.EightButton,self.NineButton,self.ZeroButton,self.AdditionButton,self.SustractionButton,self.MultiplicationButton,self.DivisionButton] forKeys:@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0",@"+",@"-",@"x",@"/"]];
     // Do any additional setup after loading the view.
 }
 
@@ -75,10 +108,11 @@
 #pragma mark - Actions
 - (IBAction)onNumberButtonPressed:(UIButton *)sender{
     
-    NSString *input = sender.titleLabel.text;
-    
+    //NSString *input = [self.actionsWithIdentifiers ];
+    NSString * input= sender.titleLabel.text;
     [self.myCalc numberPressed:input];
-    //[self updateLabel];
+    
+    
 };
 
 - (IBAction)onOperatorButtonPressed:(UIButton *)sender{
@@ -101,60 +135,40 @@
     }
     
     [self.myCalc operationPressed:self.currentOperation];
-    //[self updateLabel];
     
 };
 
 - (IBAction)onClearButtonPressed:(UIButton *)sender{
     [self.myCalc reset];
-    [self.resultDisplayLabel setText:@"0"];
     
 };
 
 - (IBAction)onCommaButtonPressed:(UIButton *)sender{
     
     [self.myCalc commaPressed];
-    //[self updateLabel];
 };
 
 - (IBAction)onEqualsButtonPressed:(UIButton *)sender {
     
     [self.myCalc executeOperation];
-    //[self updateLabel];
-    if([self.myCalc redrawIsNeeded]){
-        //[self updateLabel];
-    }else{
-    [self.resultDisplayLabel setText: [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[self.myCalc.ans floatValue]]]];
-    }
 }
+
 - (IBAction)onHistoryButtonPressed:(UIButton *)sender{
     [self.myCalc printHistory];
 };
 
 
-#pragma mark - Custom messages
+#pragma mark - Label update
 
 -(void) onDisplayChange:(NSString*) upperDisplay withResult:(NSNumber*)result{
     [self.operationResultDisplayLabel setText:upperDisplay ];
-    
     [self.resultDisplayLabel setText: [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[result  floatValue]]]];
     [self resultLabelAnimation: self.resultDisplayLabel.layer ];
 }
 
--(void) updateLabel{
-    [self.operationResultDisplayLabel setText:[self.myCalc lastOperationPerformed] ];
-    
-    [self.resultDisplayLabel setText: [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[self.myCalc.ans floatValue]]]];
-    [self resultLabelAnimation: self.resultDisplayLabel.layer ];
-}
-
--(void) changeLabelValue:(float) value{
-    NSString * valueString= [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:value] ];
-    [self.resultDisplayLabel setText:valueString];
-}
-
 
 #pragma mark - Animations
+
 -(void) resultLabelAnimation:(CALayer *) myLayer{
     CATransition *transitionAnimation = [CATransition animation];
     [transitionAnimation setType:kCATransitionFromBottom];

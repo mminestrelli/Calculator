@@ -58,18 +58,22 @@
         self.commaYetPressed=YES;
         self.operandString= [self.operandString stringByAppendingString:@"."];
     }
+    self.lastOperationString=[self.lastOperationString stringByAppendingString:@"."];
     [self.delegate onDisplayChange:self.lastOperationString withResult:self.ans];
 }
 
 -(void)numberPressed:(NSString *)number{
     if(![number isEqualToString:@"0"] || ! [self.operandString isEqualToString:@"0"]){
         self.operandString= [self.operandString stringByAppendingString:number];
+        
+        self.lastOperationString=[self.lastOperationString stringByAppendingString:number];
     }
     if(self.operation!=nil){
         self.secondOperand=[NSNumber numberWithFloat:[self.operandString floatValue]];
     }else{
         self.firstOperand=[NSNumber numberWithFloat:[self.operandString floatValue]];
     }
+    
     [self.delegate onDisplayChange:self.lastOperationString withResult:self.ans];
 }
 
@@ -82,6 +86,7 @@
     self.operation=oper;
     self.commaYetPressed=NO;
     self.operandString=@"";
+    self.lastOperationString=[self.lastOperationString stringByAppendingString:[oper operationString] ];
     [self.delegate onDisplayChange:self.lastOperationString withResult:self.ans];
 };
 
@@ -105,13 +110,10 @@
         operationDetail= [operationDetail stringByAppendingString: [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[self.secondOperand floatValue]]]];
     }
     self.lastOperationString=operationDetail;
+    [self.delegate onDisplayChange:operationDetail withResult:self.ans];
     return operationDetail;
 };
 
-
--(CGFloat) getAnsAsFloat{
-    return [self.ans floatValue];
-};
 
 -(void) executeOperation{
     
@@ -151,11 +153,6 @@
     self.ans = [[NSNumber alloc]initWithFloat:0];
     [self setVariablesInNil];
     [self.delegate onDisplayChange:self.lastOperationString withResult:self.ans];
-}
-
--(BOOL) redrawIsNeeded{
-    
-    return [[self lastOperationPerformed] isEqualToString:self.lastOperationString];
 }
 
 -(void) setVariablesInNil{

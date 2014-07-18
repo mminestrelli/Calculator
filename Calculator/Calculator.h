@@ -22,9 +22,6 @@
 -(void) commaPressed;
 -(void)reset;
 -(void) printHistory;
--(CGFloat) getAnsAsFloat;
--(BOOL) redrawIsNeeded;
-
 -(void) executeOperation;
 
 @end
