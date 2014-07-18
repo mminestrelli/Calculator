@@ -49,13 +49,6 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-#pragma mark - MultiplesOfTwo
 
--(void) onMultipleOfTwoOperationFinished:(NSArray *)numbers{
-    
-    
-    NSLog(@"Finished with numbers %@",numbers);
-    
-}
 
 @end

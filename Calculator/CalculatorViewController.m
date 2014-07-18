@@ -14,21 +14,6 @@
     Calculator * _myCalc;
     id<Operation> _currentOperation;
     NSNumberFormatter * _numberFormatter;
-    NSDictionary* _actionsWithIdentifiers;
-    UIButton * __OneButton;
-    UIButton * __TwoButton;
-    UIButton * __ThreeButton;
-    UIButton * __FourButton;
-    UIButton * __FiveButton;
-    UIButton * __SixButton;
-    UIButton * __SevenButton;
-    UIButton * __EightButton;
-    UIButton * __NineButton;
-    UIButton * __ZeroButton;
-    UIButton * __AdditionButton;
-    UIButton * __SustractionButton;
-    UIButton * __MultiplicationButton;
-    UIButton * __DivisionButton;
     
 }
 
@@ -38,7 +23,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *resultDisplayLabel;
 @property (strong, nonatomic) IBOutlet UILabel *operationResultDisplayLabel;
 @property (nonatomic,strong) NSNumberFormatter * numberFormatter;
-@property (nonatomic,strong) NSDictionary * actionsWithIdentifiers;
 
 
 - (IBAction)onNumberButtonPressed:(UIButton *)sender;
@@ -48,20 +32,6 @@
 - (IBAction)onEqualsButtonPressed:(UIButton *)sender;
 - (IBAction)onHistoryButtonPressed:(UIButton *)sender;
 
-@property (weak, nonatomic) IBOutlet UIButton *OneButton;
-@property (weak, nonatomic) IBOutlet UIButton *TwoButton;
-@property (weak, nonatomic) IBOutlet UIButton *ThreeButton;
-@property (weak, nonatomic) IBOutlet UIButton *FourButton;
-@property (weak, nonatomic) IBOutlet UIButton *FiveButton;
-@property (weak, nonatomic) IBOutlet UIButton *SixButton;
-@property (weak, nonatomic) IBOutlet UIButton *SevenButton;
-@property (weak, nonatomic) IBOutlet UIButton *EightButton;
-@property (weak, nonatomic) IBOutlet UIButton *NineButton;
-@property (weak, nonatomic) IBOutlet UIButton *DivisionButton;
-@property (weak, nonatomic) IBOutlet UIButton *MultiplicationButton;
-@property (weak, nonatomic) IBOutlet UIButton *SustractionButton;
-@property (weak, nonatomic) IBOutlet UIButton *AdditionButton;
-@property (weak, nonatomic) IBOutlet UIButton *ZeroButton;
 
 @end
 
@@ -84,7 +54,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.actionsWithIdentifiers= [NSDictionary dictionaryWithObjects:@[self.OneButton,self.TwoButton,self.ThreeButton,self.FourButton,self.FiveButton,self.SixButton,self.SevenButton,self.EightButton,self.NineButton,self.ZeroButton,self.AdditionButton,self.SustractionButton,self.MultiplicationButton,self.DivisionButton] forKeys:@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"0",@"+",@"-",@"x",@"/"]];
+
     // Do any additional setup after loading the view.
 }
 
@@ -125,13 +95,7 @@
     } else if([input isEqualToString:@"x"]) {
         self.currentOperation= [[MultiplicationOperation alloc]init];
     } else if([input isEqualToString:@"/"]) {
-        /*if((self.operand==0.0 && ![self.operandString isEqualToString:@""])||([self.myCalc.ans floatValue]==0.0 && [self.operandString isEqualToString:@""])){
-         self.printed=YES;
-         [self.resultDisplayLabel setText:@"∞"];
-         }else{*/
         self.currentOperation= [[DivisionOperation alloc]init];
-        
-        //}
     }
     
     [self.myCalc operationPressed:self.currentOperation];
