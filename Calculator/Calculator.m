@@ -57,6 +57,7 @@
         self.operandString= [self.operandString stringByAppendingString:@"."];
     }
 }
+
 -(void)numberPressed:(NSString *)number{
     if(![number isEqualToString:@"0"] || ! [self.operandString isEqualToString:@"0"]){
         self.operandString= [self.operandString stringByAppendingString:number];
@@ -112,10 +113,13 @@
     if(self.operation==nil && self.secondOperand==nil && self.firstOperand!=nil){
         self.ans=self.firstOperand;
     }else if(self.operation==nil && self.secondOperand==nil && self.firstOperand==nil){
+        self.firstOperand=self.ans;
         self.secondOperand=self.lastSecondOperand;
         self.operation=self.lastOperation;
+        
     }
-    else
+        
+    if(self.operation!=nil && self.secondOperand!=nil )
     {
         NSString * operationDetail= [self lastOperationPerformed];
         
@@ -123,7 +127,7 @@
             self.firstOperand=self.ans;
         }
         self.ans=[NSNumber numberWithFloat:[self.operation operate:[self.firstOperand floatValue]  with:[self.secondOperand floatValue]]];
-        [self.history setValue:[NSString stringWithFormat:@"%f",[self.ans floatValue]] forKey:operationDetail];
+        [self.history setValue:[self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[self.ans floatValue]]] forKey:operationDetail];
     }
     self.lastSecondOperand=self.secondOperand;
     self.lastOperation=self.operation;
@@ -146,6 +150,7 @@
     
     return [[self lastOperationPerformed] isEqualToString:self.lastOperationString];
 }
+
 -(void) setVariablesInNil{
     self.firstOperand=nil;
     self.secondOperand=nil;
