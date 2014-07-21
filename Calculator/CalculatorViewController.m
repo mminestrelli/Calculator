@@ -18,7 +18,9 @@
 
 @property (nonatomic,strong) Calculator * myCalc;
 @property (nonatomic,strong) id<OperationDelegate> currentOperation;
+//Calculator Ans display
 @property (strong, nonatomic) IBOutlet UILabel *labelDisplayAns;
+//Calculator formula display
 @property (strong, nonatomic) IBOutlet UILabel *labelFormulaDisplay;
 
 - (IBAction)onNumberButtonPressed:(UIButton *)sender;
@@ -56,25 +58,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
 #pragma mark - Actions
 
-
+/*The number is pressed in the calculator*/
 - (IBAction)onNumberButtonPressed:(UIButton *)sender{
     NSString * input= sender.titleLabel.text;
     [self.myCalc numberPressed:input];
 };
 
+/*Depending on the button pressed an operation is created and 
+ that button is pressed in the calculator*/
 - (IBAction)onOperatorButtonPressed:(UIButton *)sender{
     
     NSString *input = sender.titleLabel.text;
@@ -92,19 +85,23 @@
     
 };
 
+/*Clear button is pressed in the calculator*/
 - (IBAction)onClearButtonPressed:(UIButton *)sender{
     [self.myCalc reset];
     
 };
 
+/*Comma button is pressed in the calculator*/
 - (IBAction)onCommaButtonPressed:(UIButton *)sender{
     [self.myCalc commaPressed];
 };
 
+/*Equals button is pressed in the calculator*/
 - (IBAction)onEqualsButtonPressed:(UIButton *)sender {
     [self.myCalc executeOperation];
 }
 
+/*History button is pressed in the calculator*/
 - (IBAction)onHistoryButtonPressed:(UIButton *)sender{
     [self.myCalc printHistory];
 };
@@ -112,6 +109,7 @@
 
 #pragma mark - Label update
 
+/*Set displays values on value update*/
 -(void) onValueUpdate:(NSString*) formula withResult:(NSString*)result{
     [self.labelFormulaDisplay setText:formula ];
     

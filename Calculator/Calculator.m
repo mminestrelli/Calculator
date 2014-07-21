@@ -74,12 +74,12 @@
 -(void)numberPressed:(NSString *)number{
     if(![number isEqualToString:@"0"] || ! [self.operandString isEqualToString:@"0"]){
         self.operandString= [self.operandString stringByAppendingString:number];
-        //self.lastOperationString=[self.lastOperationString stringByAppendingString:number];
     }
     if(self.operation!=nil){
         self.secondOperand=[NSNumber numberWithFloat:[self.operandString floatValue]];
     }else{
         self.firstOperand=[NSNumber numberWithFloat:[self.operandString floatValue]];
+        self.firstOperandDerivated=NO;
     }
     [self calculateFormulaAndNotify];
 }
@@ -90,6 +90,9 @@
     if(self.operation!=nil && self.secondOperand!=nil){
         [self executeOperation];
         self.firstOperand=self.ans;
+        self.firstOperandDerivated=YES;
+    }
+    if(self.firstOperand==nil && self.secondOperand==nil){
         self.firstOperandDerivated=YES;
     }
     self.operation=oper;
@@ -160,7 +163,6 @@
     self.lastSecondOperand=self.secondOperand;
     self.lastOperation=self.operation;
     [self calculateFormulaAndNotify];
-    self.firstOperandDerivated=NO;
     [self setVariablesInNil];
 }
 
