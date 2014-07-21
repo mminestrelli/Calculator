@@ -7,17 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Operation.h"
-#import "DrawNotificationDelegate.h"
+#import "OperationDelegate.h"
+#import "CalculatorDelegate.h"
 
 
 @interface Calculator : NSObject
 @property (nonatomic,strong) NSNumber * ans;
-@property (nonatomic,assign) id<DrawNotificationDelegate> delegate;
+@property (nonatomic,assign) id<CalculatorDelegate> delegate;
 
--(void)operationPressed:(id<Operation>)operation;
--(NSString*) lastOperationPerformed;
--(NSString*) lastOperationString;
+-(void)operationPressed:(id<OperationDelegate>)operation;
+-(NSString *) calculateFormulaAndNotify;
 -(void) numberPressed:(NSString *) number;
 -(void) commaPressed;
 -(void)reset;

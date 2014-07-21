@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol DrawNotificationDelegate <NSObject>
--(void) onDisplayChange:(NSString*) upperDisplay withResult:(NSNumber*)result;
+@protocol CalculatorDelegate <NSObject>
+-(void) onValueUpdate:(NSString*) formula withResult:(NSString*)result;
 @end

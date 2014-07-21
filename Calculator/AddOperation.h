@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Operation.h"
+#import "OperationDelegate.h"
 
-@interface AddOperation : NSObject<Operation>
+@interface AddOperation : NSObject<OperationDelegate>
 
 @end

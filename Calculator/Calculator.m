@@ -14,26 +14,34 @@
     NSNumber * _lastSecondOperand;
     NSNumber * _ans;
     NSString * _operandString;
-    NSString * _lastOperationString;
     NSMutableDictionary * _history;
     NSNumberFormatter * _numberFormatter;
     BOOL _commaYetPressed;
-    BOOL _erase;
-    id<Operation> _operation;
-    id<Operation> _lastOperation;
+    BOOL _firstOperandDerivated;
+    id<OperationDelegate> _operation;
+    id<OperationDelegate> _lastOperation;
 
 }
+    //First operand of a binary operation
     @property (nonatomic,strong) NSNumber * firstOperand;
+    //Second Operand of a binary operation
     @property (nonatomic,strong) NSNumber * secondOperand;
+    //Second operand used in the last excuted operation to allow the user to repeat the operation
     @property (nonatomic,strong) NSNumber * lastSecondOperand;
+    //User number formatting preferences
     @property (nonatomic,strong) NSNumberFormatter * numberFormatter;
-    @property (nonatomic,copy) NSString * lastOperationString;
+    //Current operator 
     @property (nonatomic,copy) NSString * operandString;
+    //Indicates wheter comma has been pressed in the current operand or not
     @property (nonatomic) BOOL commaYetPressed;
-    @property (nonatomic) BOOL erase;
+    //Indicates wheter first operand was written by the user or is derivated from the last operation executed result
+    @property (nonatomic) BOOL firstOperandDerivated;
+    //History of operations done in the last session.
     @property (nonatomic,strong) NSMutableDictionary * history;
-    @property (nonatomic,strong) id<Operation> operation;
-    @property (nonatomic,strong) id<Operation> lastOperation;
+    //Current binary operation to execute
+    @property (nonatomic,strong) id<OperationDelegate> operation;
+    //Last operation executed used to allow the user to repeat the operation
+    @property (nonatomic,strong) id<OperationDelegate> lastOperation;
 
 
 
@@ -52,75 +60,86 @@
     return self;
 }
 
-
+/* Appends the comma to the current operand if it wasn't pressed before, notifies value update*/
 -(void) commaPressed{
     if(!self.commaYetPressed){
         self.commaYetPressed=YES;
         self.operandString= [self.operandString stringByAppendingString:@"."];
     }
-    self.lastOperationString=[self.lastOperationString stringByAppendingString:@"."];
-    [self.delegate onDisplayChange:self.lastOperationString withResult:self.ans];
+
+    [self calculateFormulaAndNotify];
 }
 
+/*Sets the number pressed on the corresponding operand according to the value of the variable operation*/
 -(void)numberPressed:(NSString *)number{
     if(![number isEqualToString:@"0"] || ! [self.operandString isEqualToString:@"0"]){
         self.operandString= [self.operandString stringByAppendingString:number];
-        
-        self.lastOperationString=[self.lastOperationString stringByAppendingString:number];
+        //self.lastOperationString=[self.lastOperationString stringByAppendingString:number];
     }
     if(self.operation!=nil){
         self.secondOperand=[NSNumber numberWithFloat:[self.operandString floatValue]];
     }else{
         self.firstOperand=[NSNumber numberWithFloat:[self.operandString floatValue]];
     }
-    
-    [self.delegate onDisplayChange:self.lastOperationString withResult:self.ans];
+    [self calculateFormulaAndNotify];
 }
 
--(void)operationPressed:(id<Operation>)oper{
+/* Saves the current operation,in case of having an executable operation (first operand,operation and operand)
+ first execute */
+-(void)operationPressed:(id<OperationDelegate>)oper{
     if(self.operation!=nil && self.secondOperand!=nil){
         [self executeOperation];
         self.firstOperand=self.ans;
+        self.firstOperandDerivated=YES;
     }
-    self.erase=YES;
     self.operation=oper;
     self.commaYetPressed=NO;
     self.operandString=@"";
-    self.lastOperationString=[self.lastOperationString stringByAppendingString:[oper operationString] ];
-    [self.delegate onDisplayChange:self.lastOperationString withResult:self.ans];
+    [self calculateFormulaAndNotify];
 };
 
--(NSString*) lastOperationPerformed{
-    NSString * operationDetail=@"";
+/*Caculates the current formula and notifies*/
+-(NSString*) calculateFormulaAndNotify{
+    NSString * formula=@"";
+    NSString * ans=@"";
 
-    if(self.firstOperand!=nil){
-        operationDetail= [operationDetail stringByAppendingString: [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[self.firstOperand floatValue]]]];}
+    if(self.firstOperand!=nil && !self.firstOperandDerivated){
+        formula= [formula stringByAppendingString: [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[self.firstOperand floatValue]]]];
+    }
     else{
-        if(self.erase){
-            
-            operationDetail= [operationDetail stringByAppendingString: [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[self.ans floatValue]]]];
+        if(self.firstOperandDerivated){
+        formula= [formula stringByAppendingString: @"Ans"];
         }
     }
     
     if(self.operation!=nil){
-        operationDetail= [operationDetail stringByAppendingString:[self.operation operationString]];
+        formula= [formula stringByAppendingString:[self.operation operationString]];
     }
     
     if(self.secondOperand!=nil){
-        operationDetail= [operationDetail stringByAppendingString: [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[self.secondOperand floatValue]]]];
+        formula= [formula stringByAppendingString: [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[self.secondOperand floatValue]]]];
     }
-    self.lastOperationString=operationDetail;
-    [self.delegate onDisplayChange:operationDetail withResult:self.ans];
-    return operationDetail;
+    
+    if(self.ans!=nil){
+        ans=[ ans stringByAppendingString:[self.numberFormatter stringFromNumber:self.ans]];
+    }
+    [self.delegate onValueUpdate:formula withResult:ans];
+    return formula;
 };
 
-
+/*Executes the binary operation between the first operand and the second operand. If the user
+ only inserts the first operand and executes the operation ans loads firstOperand. 
+ If the user executes the operation and no operators or operation is saved, it´s asummed that
+ the user wants to re-execute the last operation based on the last ans (firstOperand) and the
+ lastSecondOperand and lastOperation.
+ */
 -(void) executeOperation{
     
     if(self.operation==nil && self.secondOperand==nil && self.firstOperand!=nil){
         self.ans=self.firstOperand;
     }else if(self.operation==nil && self.secondOperand==nil && self.firstOperand==nil){
         self.firstOperand=self.ans;
+        self.firstOperandDerivated=YES;
         self.secondOperand=self.lastSecondOperand;
         self.operation=self.lastOperation;
         
@@ -128,20 +147,24 @@
         
     if(self.operation!=nil && self.secondOperand!=nil )
     {
-        NSString * operationDetail= [self lastOperationPerformed];
+        NSString * operationDetail= [self calculateFormulaAndNotify];
         
         if(self.firstOperand==nil){
             self.firstOperand=self.ans;
+            self.firstOperandDerivated=YES;
         }
         self.ans=[NSNumber numberWithFloat:[self.operation operate:[self.firstOperand floatValue]  with:[self.secondOperand floatValue]]];
         [self.history setValue:[self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[self.ans floatValue]]] forKey:operationDetail];
+        
     }
     self.lastSecondOperand=self.secondOperand;
     self.lastOperation=self.operation;
-    [self.delegate onDisplayChange:self.lastOperationString withResult:self.ans];
+    [self calculateFormulaAndNotify];
+    self.firstOperandDerivated=NO;
     [self setVariablesInNil];
 }
 
+/* Logs the history of operations done in the last session*/
 -(void) printHistory{
     NSLog(@"History");
     for (NSString* key in self.history) {
@@ -149,10 +172,12 @@
     }
 }
 
+/* Resets calculator variables and notifies value update */
 -(void)reset{
     self.ans = [[NSNumber alloc]initWithFloat:0];
     [self setVariablesInNil];
-    [self.delegate onDisplayChange:self.lastOperationString withResult:self.ans];
+    self.firstOperandDerivated=NO;
+    [self calculateFormulaAndNotify];
 }
 
 -(void) setVariablesInNil{
@@ -160,9 +185,7 @@
     self.secondOperand=nil;
     self.operation=nil;
     self.operandString=@"";
-    self.lastOperationString=@"";
     self.commaYetPressed=NO;
-    self.erase=NO;
 }
 
 

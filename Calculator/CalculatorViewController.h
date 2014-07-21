@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Operation.h"
+#import "OperationDelegate.h"
 #import "AddOperation.h"
 #import "SubstractOperation.h"
 #import "MultiplicationOperation.h"
 #import "DivisionOperation.h"
-#import "DrawNotificationDelegate.h"
+#import "CalculatorDelegate.h"
 
-@interface CalculatorViewController : UIViewController<DrawNotificationDelegate>
+@interface CalculatorViewController : UIViewController<CalculatorDelegate>
 
 @end

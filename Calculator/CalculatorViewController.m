@@ -12,16 +12,14 @@
 
 @interface CalculatorViewController (){
     Calculator * _myCalc;
-    id<Operation> _currentOperation;
-    NSNumberFormatter * _numberFormatter;
+    id<OperationDelegate> _currentOperation;
     
 }
 
 @property (nonatomic,strong) Calculator * myCalc;
-@property (nonatomic,strong) id<Operation> currentOperation;
-@property (strong, nonatomic) IBOutlet UILabel *resultDisplayLabel;
-@property (strong, nonatomic) IBOutlet UILabel *operationResultDisplayLabel;
-@property (nonatomic,strong) NSNumberFormatter * numberFormatter;
+@property (nonatomic,strong) id<OperationDelegate> currentOperation;
+@property (strong, nonatomic) IBOutlet UILabel *labelDisplayAns;
+@property (strong, nonatomic) IBOutlet UILabel *labelFormulaDisplay;
 
 - (IBAction)onNumberButtonPressed:(UIButton *)sender;
 - (IBAction)onOperatorButtonPressed:(UIButton *)sender;
@@ -41,9 +39,6 @@
     if (self) {
         self.myCalc=[[Calculator alloc]init];
         [self.myCalc setDelegate:self];
-        self.numberFormatter = [[NSNumberFormatter alloc] init];
-        [self.numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        
         
     }
     return self;
@@ -73,8 +68,9 @@
  */
 
 #pragma mark - Actions
-- (IBAction)onNumberButtonPressed:(UIButton *)sender{
 
+
+- (IBAction)onNumberButtonPressed:(UIButton *)sender{
     NSString * input= sender.titleLabel.text;
     [self.myCalc numberPressed:input];
 };
@@ -102,12 +98,10 @@
 };
 
 - (IBAction)onCommaButtonPressed:(UIButton *)sender{
-    
     [self.myCalc commaPressed];
 };
 
 - (IBAction)onEqualsButtonPressed:(UIButton *)sender {
-    
     [self.myCalc executeOperation];
 }
 
@@ -118,20 +112,21 @@
 
 #pragma mark - Label update
 
--(void) onDisplayChange:(NSString*) upperDisplay withResult:(NSNumber*)result{
-    [self.operationResultDisplayLabel setText:upperDisplay ];
+-(void) onValueUpdate:(NSString*) formula withResult:(NSString*)result{
+    [self.labelFormulaDisplay setText:formula ];
     
-    [self.resultDisplayLabel setText: [self.numberFormatter stringFromNumber:[NSNumber numberWithFloat:[result  floatValue]]]];
-    [self resultLabelAnimation: self.resultDisplayLabel.layer ];
+    [self.labelDisplayAns setText: result];
+    [self resultLabelAnimation: self.labelDisplayAns.layer ];
 }
 
 
 #pragma mark - Animations
 
+/* Animation for result displaying*/
 -(void) resultLabelAnimation:(CALayer *) myLayer{
     CATransition *transitionAnimation = [CATransition animation];
     [transitionAnimation setType:kCATransitionFromBottom];
-    [transitionAnimation setDuration:0.5f];
+    [transitionAnimation setDuration:0.3f];
     [transitionAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
     [transitionAnimation setFillMode:kCAFillModeBoth];
     [myLayer addAnimation:transitionAnimation forKey:@"fadeanimation"];

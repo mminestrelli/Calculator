@@ -45,14 +45,14 @@
 		4E8775941965ABD7003514A7 /* CalculatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalculatorViewController.xib; sourceTree = "<group>"; };
 		4EB2D196196EDA8600873062 /* AddOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddOperation.h; sourceTree = "<group>"; };
 		4EB2D197196EDA8600873062 /* AddOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddOperation.m; sourceTree = "<group>"; };
-		4EB2D199196EDAB900873062 /* Operation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Operation.h; sourceTree = "<group>"; };
+		4EB2D199196EDAB900873062 /* OperationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OperationDelegate.h; sourceTree = "<group>"; };
 		4EB2D19A196EDB4000873062 /* SubstractOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubstractOperation.h; sourceTree = "<group>"; };
 		4EB2D19B196EDB4000873062 /* SubstractOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubstractOperation.m; sourceTree = "<group>"; };
 		4EB2D19D196EDB4C00873062 /* MultiplicationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplicationOperation.h; sourceTree = "<group>"; };
 		4EB2D19E196EDB4C00873062 /* MultiplicationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiplicationOperation.m; sourceTree = "<group>"; };
 		4EB2D1A0196EDB5600873062 /* DivisionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivisionOperation.h; sourceTree = "<group>"; };
 		4EB2D1A1196EDB5600873062 /* DivisionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivisionOperation.m; sourceTree = "<group>"; };
-		4EB989841979623000E467D8 /* DrawNotificationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DrawNotificationDelegate.h; path = ../DrawNotificationDelegate.h; sourceTree = "<group>"; };
+		4EB989841979623000E467D8 /* CalculatorDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CalculatorDelegate.h; path = ../CalculatorDelegate.h; sourceTree = "<group>"; };
 		4ED15CB5196F06100098C95C /* Calculator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Calculator-icon.png"; sourceTree = "<group>"; };
 		4ED98AB31964581200E5AA59 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ED98AB61964581200E5AA59 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -141,9 +141,9 @@
 				4E71AADE1966E7600099B929 /* CalculatorViewController.h */,
 				4E71AADF1966E7600099B929 /* CalculatorViewController.m */,
 				4E8775941965ABD7003514A7 /* CalculatorViewController.xib */,
-				4EB989841979623000E467D8 /* DrawNotificationDelegate.h */,
+				4EB989841979623000E467D8 /* CalculatorDelegate.h */,
 				4EB2D196196EDA8600873062 /* AddOperation.h */,
-				4EB2D199196EDAB900873062 /* Operation.h */,
+				4EB2D199196EDAB900873062 /* OperationDelegate.h */,
 				4EB2D19A196EDB4000873062 /* SubstractOperation.h */,
 				4EB2D19B196EDB4000873062 /* SubstractOperation.m */,
 				4EB2D19D196EDB4C00873062 /* MultiplicationOperation.h */,

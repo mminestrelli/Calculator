@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol Operation <NSObject>
+@protocol OperationDelegate <NSObject>
 
 -(CGFloat) operate:(CGFloat) ans with: (CGFloat) value;
 -(NSString *) operationString;

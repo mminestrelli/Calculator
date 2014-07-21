@@ -6,8 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CalculatorViewController">
             <connections>
-                <outlet property="operationResultDisplayLabel" destination="VjA-ZD-X2V" id="DqD-Dh-Suv"/>
-                <outlet property="resultDisplayLabel" destination="uvW-GU-f38" id="y8s-T7-6IX"/>
+                <outlet property="labelDisplayAns" destination="uvW-GU-f38" id="h6A-KM-eli"/>
+                <outlet property="labelFormulaDisplay" destination="VjA-ZD-X2V" id="XA2-2C-OCt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="RL4-gG-Mc6"/>
             </connections>
         </placeholder>
